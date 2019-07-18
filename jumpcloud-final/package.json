@@ -1,0 +1,50 @@
+{
+  "name": "jumpcloud-final",
+  "version": "1.0.0",
+  "description": "Jumpcloud UI Submission",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TheJumpCloud/jumpcloud-ui-assignment.git"
+  },
+  "private": true,
+  "author": "JumpCloud",
+  "bugs": {
+    "url": "https://github.com/TheJumpCloud/jumpcloud-ui-assignment/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start:client": "webpack-dev-server --mode development --open",
+    "start:server": "node server.js --open --hot",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "license": "ISC"
+}

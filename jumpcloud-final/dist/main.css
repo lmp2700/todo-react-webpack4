@@ -1,0 +1,105 @@
+body {
+    margin: 25px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #D9AFD9;
+    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+    justify-content: center;
+    height: 100vh
+  }
+  
+h1 {
+  text-align: center
+}  
+
+.sidebar {
+    grid-area: sidebar;
+    text-align: center
+}
+  
+  .content {
+    grid-area: content;
+    position: relative;
+    text-align: left
+  }
+  
+  .header {
+    grid-area: header;
+    text-align: center
+  }
+  
+  .footer {
+    grid-area: footer;
+    text-align: center
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-areas:
+        "header  header  header"
+        "sidebar content content"
+        "footer  footer  footer";
+    color: #444;
+      }
+  
+  
+  .box {
+    background-color: #333333;
+    color: #fff;
+    border-radius: 5px;
+    padding: 40px;
+    font-size: 150%;
+  }
+  
+  .header,
+  .footer {
+    background-color: #21939C;
+    color: #fff;
+    text-align: center
+  }
+
+  .button {
+    color:lightgray solid;
+    background-color: teal;
+    border: lightgray solid;
+    border-radius: 5px;
+    margin: 10px 0 0 212px;
+    position: absolute;
+  }
+  
+  ion-icon {
+    font-size: 64px;
+    margin: 15px;
+  }
+
+  .intro {
+    padding-top: 10%;
+    position: absolute
+  }
+
+  .topleft {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .topright {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  .bottomleft {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .bottomright {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+/*# sourceMappingURL=main.css.map*/
