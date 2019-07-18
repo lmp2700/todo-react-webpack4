@@ -1,12 +1,12 @@
 # Wireframe
-![Image of Wireframe]('/src/images/wireframe.png')
+![Image of Wireframe](/src/images/wireframe.png)
 
 # Resources
 - Google Fonts
 - Ionicons
-- [Coolers:] (https://coolors.co/dcf5f8-2ccad6-21939c-fb6666-333333)
+- [Coolers] (https://coolors.co/dcf5f8-2ccad6-21939c-fb6666-333333)
 - Grabient
-- [Webpack Tutorial:] (https://youtu.be/TzdEpgONurw)
+- [Webpack Tutorial] (https://youtu.be/TzdEpgONurw)
 - Various StackOverflow and Google searches
 
 ## RESTful Routes Created
