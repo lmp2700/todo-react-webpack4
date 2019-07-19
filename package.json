@@ -12,6 +12,7 @@
     "url": "https://github.com/TheJumpCloud/jumpcloud-ui-assignment/issues"
   },
   "main": "index.js",
+  "proxy": "http://localhost:8004",
   "scripts": {
     "start:client": "webpack-dev-server --mode development --open",
     "start:server": "node server.js --open --hot",

@@ -10,75 +10,9 @@ class Main extends Component {
       todos: [],
       newTodos: {
         "description": "",
-        "completed": false
+        "done": false
       }
     }
-  }
-
-  getToDoList = async () => {
-    try {
-      const toDoAPI = await fetch('http://localhost:8004/api/todos', {
-        method: "GET",
-        credentials: 'include'
-      });
-      console.log(toDoAPI)
-      const toDoAPIJson = await toDoAPI.json();
-      console.log(toDoAPIJson)
-      return toDoAPIJson;
-    } catch(err) {
-      return(err)
-    }
-  }
-
-  createToDo = async (e) => {
-    e.preventDefault();
-    const newToDo = await fetch('http://localhost:8004/api/todos', {
-      method: "POST",
-      credentials: 'include',
-      body: JSON.stringify(this.state.newToDos),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const newToDoParsed = await newToDo.json();
-    if(newToDoParsed.status === 200) {
-      document.getElementById("new-todo-form").result();
-      this.setState({
-        todos: [...this.state.todos, newToDoParsed.data]
-      })
-    }
-  }
-
-  deleteToDo = async (e) => {
-    const deleteToDo = await fetch('http://localhost:8004/api/todos' + id, {
-      method: "DELETE",
-      credentials: 'include'
-    })
-    const deletedToDoParsed = await deleteToDo.json();
-    if(deletedToDoParsed === 200) {
-      this.setState({
-        todos: this.state.todos.filter((todo) => {
-          return todo._id != id
-        })
-      })
-    }
-  }
-
-  updateToDo = async (todoInfo) => {
-    const updateToDo = await fetch('http://localhost:8004/api/todos', {
-      method: "PUT",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify(todoInfo)
-    })
-    const response = await updateToDo.json();
-    this.setState({
-      todos: this.state.todos.map((todo) => {
-        return todo._id === response.data._id ? response.data : todo
-      })
-    })
   }
 
   componentDidMount() {
@@ -90,26 +24,87 @@ class Main extends Component {
   }
 
   handleNewChange = (e) => {
-    console.log(this.state.newToDos)
+    console.log("handleNewChange")
     this.setState({
         newToDos: {
             ...this.state.newToDos,
             [e.currentTarget.name]: e.currentTarget.value
         }
     })
-}
+  }
 
-onCreate = () => {
-  this.props.history.push("/create")
-}
+  getToDoList = async () => {
+    try {
+      const toDoAPI = await fetch('/api/todos', {
+        method: "GET",
+        credentials: 'include'
+      });
+      const toDoAPIJson = await toDoAPI.json();
+      return toDoAPIJson;
+    } catch(err) {
+      return(err)
+    }
+  }
 
-onView = () => {
-  this.props.history.push("/todos")
-}
+  createToDo = async (e) => {
+    // e.preventDefault();
+    console.log("createToDo")
+    const newToDo = await fetch('/api/todos', {
+      method: "POST",
+      credentials: 'include',
+      body: JSON.stringify(this.state.newToDo),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    const newToDoParsed = await newToDo.json();
+    console.log(newToDoParsed)
+    if(newToDoParsed.status === 200) {
+      document.getElementById("new-todo-form").result();
+      this.setState({
+        todos: [...this.state.todos, newToDoParsed.data]
+      })
+      console.log("created todo")
+    }
+  }
 
-onEdit = () => {
-  this.props.history.push("/edit")
-}
+  updateToDo = async (todoInfo) => {
+    console.log("updateToDo")
+    const updateToDo = await fetch('/api/todos', {
+      method: "PUT",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(todoInfo)
+    })
+    const response = await updateToDo.json();
+    console.log(response)
+    this.setState({
+      todos: this.state.todos.map((todo) => {
+        return todo.id === response.data.id ? response.data : todo
+      })
+    })
+    console.log("updated todo")
+  }
+
+  deleteToDo = async (e) => {
+    console.log("deleteToDo")
+    const deleteToDo = await fetch('/api/todos' + id, {
+      method: "DELETE",
+      credentials: 'include'
+    })
+    const deletedToDoParsed = await deleteToDo.json();
+    console.log(deletedToDoParsed)
+    if(deletedToDoParsed === 200) {
+      this.setState({
+        todos: this.state.todos.filter((todo) => {
+          return todo.id != id
+        })
+      })
+      console.log("deleted todo")
+    }
+  }
 
   render() {
     return (  
@@ -118,17 +113,17 @@ onEdit = () => {
           <h1>To Do List</h1>
         </div>
         <div className="box sidebar">
-          Select <ion-icon name="arrow-round-down"></ion-icon>
+          Make <ion-icon name="arrow-round-forward"></ion-icon>
         </div>
         <div className="box content">
-          <label className="intro">A simple to-do application</label>
           <NewToDo createToDo={this.createToDo} handleNewChange={this.handleNewChange} />
-          <ToDoList updateToDo={this.updateToDo} deleteToDo={this.deleteToDo} todos={this.state.todos} />
+          <hr></hr>
+              <ToDoList updateToDo={this.updateToDo} deleteToDo={this.deleteToDo} todos={this.state.todos} />
         </div>
         <div className="box footer">
-          <ion-icon name="add-circle" onClick={this.onCreate} title="Add to Your List"></ion-icon>
+          {/* <ion-icon name="add-circle" onClick={this.onCreate} title="Add to Your List"></ion-icon>
           <ion-icon name="list-box" onClick={this.onView} title="View Your List"></ion-icon> 
-          <ion-icon name="create" onClick={this.onEdit} title="Edit Your List"></ion-icon>
+          <ion-icon name="create" onClick={this.onEdit} title="Edit Your List"></ion-icon> */}
         </div>
       </main>
     )

@@ -3,6 +3,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
+    devtool: 'cheap-module-source-map',
+    devServer: {
+        proxy: {
+          '/api': 'http://localhost:8005',
+          secure: false,
+          changeOrigin: true
+        }
+      },
     module: {
         rules: [
             {
@@ -35,27 +43,12 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: '/src/index.html',
-            filename: '/src/index.html' // output
+            template: './src/index.html',
+            filename: 'index.html' // output
         }),
         new MiniCssExtractPlugin({
             filename: '[name]'.css,
             chunkFilename: '[id].css'
         }),
     ],
-    devtool: 'cheap-module-source-map',
-    // devServer: {
-    //     proxy: {
-    //     '/api/todos': {
-    //         target: 'http://localhost:8082',
-    //         secure: false,
-    //         changeOrigin: true,
-    //     }
-    // },
-    //     headers: {
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Access-Control-Allow-Headers': 'Content-Type',
-    //         'Access-Control-Allow-Methods': 'GET, OPTIONS, PUT, POST, DELETE',
-    //     },
-    // },
 }

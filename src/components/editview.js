@@ -8,7 +8,7 @@ class ToDoDetail extends Component{
             updatedToDo: {
                 id: this.props.todo.id,
                 description: this.props.todo.description,
-                completed: this.props.todo.completed,
+                done: this.props.todo.completed,
             }
         }
     }
@@ -39,30 +39,10 @@ class ToDoDetail extends Component{
         <div>
             <ul>
                 <li key={this.props.todo.id}>
-                    <p>{this.props.todo.description}</p>
-                    <p><input type="checkbox" checked={this.props.todo.completed}/></p>
-                    <button onClick={this.props.deleteToDo.bind(null, this.props.todo.id)}>DELETE</button>
-                    <button onClick={this.handleShow}>Edit</button>
+                   {this.props.todo.id + ' .'} {this.props.todo.description} <input type="checkbox" done={this.props.todo.completed} className="checkbox"/><button onClick={this.handleShow} className="button">Edit</button><button onClick={this.props.deleteToDo.bind(null, this.props.todo.id)} className="button">Delete</button>
                 </li>
             </ul>
         </div>
-  
-        // <Modal show={this.state.show} onHide={this.handleClose}>
-        //   <Modal.Header closeButton>
-        //     <Modal.Title>{this.props.episode.title}</Modal.Title>
-        //   </Modal.Header>
-        //   <Modal.Body>
-        //     <form onSubmit={this.handleEditSubmit}>
-        //         Title: <input type="text" name="title" placeholder={this.props.episode.title} onChange={this.handleEditChange}/><br/>
-        //         Description: <input type="text" name="description" placeholder={this.props.episode.description} onChange={this.handleEditChange}/><br/>
-        //         Rating: <input type="number" name="rating" min="1" max="5" placeholder={this.props.episode.rating} onChange={this.handleEditChange}/><br/>
-        //         <input type="submit"/>
-        //     </form>
-        //   </Modal.Body>
-        //   <Modal.Footer>
-        //     <Button onClick={this.handleClose}>Close</Button>
-        //   </Modal.Footer>
-        // </Modal>
     )}
 }
 

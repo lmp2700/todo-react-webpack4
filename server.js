@@ -10,22 +10,17 @@ const PORT = 8004; // backend server
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '/src')));
 
-// CORS headers
-app.use(function(req, res, next) {
-  const whitelist = [
-    'http://localhost:8005', 'http://localhost:8082',
-  ];
-
-  const origin = req.headers.origin;
-
-  if (whitelist.indexOf(origin) > -1) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
+// CORS 
+const whitelist = ['http://localhost:8004','http://localhost:8005'];
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (whitelist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
   }
-
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS, PUT, POST, DELETE');
-  return next();
-});
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
 
 // middlware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -43,11 +38,21 @@ const controllers = {
 };
 
 // ToDo API routes
-app.get('/api/todos', cors(corsOptions), controllers.todos.getAll);
-app.get('/api/todos/:id', cors(corsOptions), controllers.todos.getOne);
-app.post('/api/todos', cors(corsOptions), controllers.todos.create);
-app.put('/api/todos/:id', cors(corsOptions), controllers.todos.update);
-app.delete('/api/todos/:id', cors(corsOptions), controllers.todos.delete);
+app.get('/api/todos', cors(corsOptionsDelegate), controllers.todos.getAll, function(req, res, next){
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
+});
+app.get('/api/todos/:id', cors(corsOptionsDelegate), controllers.todos.getOne, function(req, res, next){
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
+});
+app.post('/api/todos', cors(corsOptionsDelegate), controllers.todos.create, function(req, res, next){
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
+});
+app.put('/api/todos/:id', cors(corsOptionsDelegate), controllers.todos.update, function(req, res, next){
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
+});
+app.delete('/api/todos/:id', cors(corsOptionsDelegate), controllers.todos.delete, function(req, res, next){
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
+});
 
 app.get('/', (req, res) => {
     res.render('index.js')
