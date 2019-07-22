@@ -11,7 +11,7 @@ const PORT = 8004; // backend server
 app.use(express.static(path.join(__dirname, '/src')));
 
 // CORS 
-const whitelist = ['http://localhost:8004','http://localhost:8005'];
+const whitelist = ['http://localhost:8004','http://localhost:8005', 'http://localhost:8082'];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (whitelist.indexOf(req.header('Origin')) !== -1) {

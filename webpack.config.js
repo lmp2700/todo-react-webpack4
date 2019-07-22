@@ -6,7 +6,7 @@ module.exports = {
     devtool: 'cheap-module-source-map',
     devServer: {
         proxy: {
-          '/api': 'http://localhost:8005',
+          '/api': 'http://localhost:8004',
           secure: false,
           changeOrigin: true
         }

@@ -7,6 +7,7 @@ class Main extends Component {
   constructor() {
     super();
     this.state = {
+      hasError: false,
       todos: [],
       newTodos: {
         "description": "",
@@ -31,6 +32,15 @@ class Main extends Component {
             [e.currentTarget.name]: e.currentTarget.value
         }
     })
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error, info)
   }
 
   getToDoList = async () => {
@@ -107,6 +117,22 @@ class Main extends Component {
   }
 
   render() {
+    if(this.state.hasError === true) {
+      return (
+        <main className="wrapper">
+          <div className="box header"> 
+            <h1>To Do List</h1>
+          </div>
+          <div className="box sidebar">
+          </div>
+          <div className="box content">
+            Error loading To Do List
+          </div>
+          <div className="box footer">
+          </div>
+        </main>
+      ) 
+    } 
     return (  
       <main className="wrapper">
         <div className="box header"> 
@@ -121,9 +147,6 @@ class Main extends Component {
               <ToDoList updateToDo={this.updateToDo} deleteToDo={this.deleteToDo} todos={this.state.todos} />
         </div>
         <div className="box footer">
-          {/* <ion-icon name="add-circle" onClick={this.onCreate} title="Add to Your List"></ion-icon>
-          <ion-icon name="list-box" onClick={this.onView} title="View Your List"></ion-icon> 
-          <ion-icon name="create" onClick={this.onEdit} title="Edit Your List"></ion-icon> */}
         </div>
       </main>
     )
