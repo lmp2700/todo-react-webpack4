@@ -39,7 +39,7 @@ class ToDoDetail extends Component{
         <div>
             <ul>
                 <li key={this.props.todo.id}>
-                   {this.props.todo.id + ' .'} {this.props.todo.description} <input type="checkbox" done={this.props.todo.completed} className="checkbox"/><button onClick={this.handleShow} className="button">Edit</button><button onClick={this.props.deleteToDo.bind(null, this.props.todo.id)} className="button">Delete</button>
+                   {this.props.todo.id}. {this.props.todo.description} <input type="checkbox" done={this.props.todo.completed} className="checkbox"/><button onClick={this.handleShow} className="button">Edit</button><button onClick={this.props.deleteToDo.bind(null, this.props.todo.id)} className="button">Delete</button>
                 </li>
             </ul>
         </div>

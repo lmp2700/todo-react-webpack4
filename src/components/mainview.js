@@ -57,9 +57,9 @@ class Main extends Component {
   }
 
   createToDo = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     console.log("createToDo")
-    const newToDo = await fetch('/api/todos', {
+    const newToDo = await fetch('/api/todos/', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify(this.state.newToDo),
@@ -80,7 +80,7 @@ class Main extends Component {
 
   updateToDo = async (todoInfo) => {
     console.log("updateToDo")
-    const updateToDo = await fetch('/api/todos', {
+    const updateToDo = await fetch('/api/todos/', {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
@@ -98,9 +98,9 @@ class Main extends Component {
     console.log("updated todo")
   }
 
-  deleteToDo = async (e) => {
+  deleteToDo = async (id, e) => {
     console.log("deleteToDo")
-    const deleteToDo = await fetch('/api/todos' + id, {
+    const deleteToDo = await fetch('/api/todos/' + id, {
       method: "DELETE",
       credentials: 'include'
     })
@@ -124,8 +124,11 @@ class Main extends Component {
             <h1>To Do List</h1>
           </div>
           <div className="box sidebar">
+            <ion-icon name="sad"></ion-icon>
           </div>
           <div className="box content">
+            <NewToDo createToDo={this.createToDo} handleNewChange={this.handleNewChange} />
+            <hr></hr>
             Error loading To Do List
           </div>
           <div className="box footer">
@@ -144,7 +147,7 @@ class Main extends Component {
         <div className="box content">
           <NewToDo createToDo={this.createToDo} handleNewChange={this.handleNewChange} />
           <hr></hr>
-              <ToDoList updateToDo={this.updateToDo} deleteToDo={this.deleteToDo} todos={this.state.todos} />
+          <ToDoList updateToDo={this.updateToDo} deleteToDo={this.deleteToDo} todos={this.state.todos} />
         </div>
         <div className="box footer">
         </div>
